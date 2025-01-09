@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Grid, Box, Typography, Button, TextField, CircularProgress } from '@mui/material';
+import { Grid, Box, Typography, Button, TextField } from '@mui/material';
 import { Book } from '@/utils/types/types';
 import RatingStars from './RatingStars';
 import { toast } from 'react-toastify';
@@ -10,17 +10,19 @@ import MenuBookIcon from '@mui/icons-material/MenuBook';
 interface BookListProps {
   filteredBooks: Book[];
   handleViewDetails: (book: Book) => void;
-  refetchBooks: () => void; 
+  refetchBooks: () => void;
   handleAddBookToList: (book: Book) => Promise<void>;
 }
 
-const BookList: React.FC<BookListProps> = ({ filteredBooks, handleViewDetails, refetchBooks }) => {
+const BookList: React.FC<BookListProps> = ({
+  filteredBooks,
+  handleViewDetails,
+  refetchBooks,
+}) => {
   const [isbn, setIsbn] = useState<string>('');
   const [bookData, setBookData] = useState<Book | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
-  const [error, setError] = useState<string>('');
   const [saveLoading, setSaveLoading] = useState<boolean>(false);
-  const [saveError, setSaveError] = useState<string>('');
   const [bookAdded, setBookAdded] = useState<boolean>(false);
 
   const mapToBook = (data: any): Book => ({
@@ -37,10 +39,9 @@ const BookList: React.FC<BookListProps> = ({ filteredBooks, handleViewDetails, r
 
   const fetchBookByISBN = async (isbn: string) => {
     setLoading(true);
-    setError('');
     try {
       const response = await axios.get(
-        `https://openlibrary.org/api/books?bibkeys=ISBN:${isbn}&format=json&jscmd=data`
+        `https://openlibrary.org/api/books?bibkeys=ISBN:${isbn}&format=json&jscmd=data`,
       );
       if (!response.data || !response.data[`ISBN:${isbn}`]) {
         throw new Error('No book data found for the provided ISBN');
@@ -48,7 +49,7 @@ const BookList: React.FC<BookListProps> = ({ filteredBooks, handleViewDetails, r
       const book = mapToBook(response.data[`ISBN:${isbn}`]);
       setBookData(book);
     } catch (error) {
-      setError('Error fetching book data from Open Library API');
+      console.error('Error fetching book data from Open Library API:', error);
     } finally {
       setLoading(false);
     }
@@ -56,22 +57,15 @@ const BookList: React.FC<BookListProps> = ({ filteredBooks, handleViewDetails, r
 
   const saveBookToDatabase = async (book: Book) => {
     setSaveLoading(true);
-    setSaveError('');
     try {
       await axios.post('http://localhost:3000/books', book);
       toast.success('Book added successfully!');
       refetchBooks();
-      setBookAdded(true); 
+      setBookAdded(true);
     } catch (error) {
-      setSaveError('Error saving the book to the database');
+      console.error('Error saving the book to the database:', error);
     } finally {
       setSaveLoading(false);
-    }
-  };
-
-  const handleSearchByISBN = () => {
-    if (isbn) {
-      fetchBookByISBN(isbn);
     }
   };
 
@@ -106,8 +100,6 @@ const BookList: React.FC<BookListProps> = ({ filteredBooks, handleViewDetails, r
           </Box>
         </Box>
 
-        {error && <Typography color="error">{error}</Typography>}
-
         {bookData && !bookAdded && (
           <Box sx={{ marginBottom: '20px' }}>
             <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
@@ -128,7 +120,13 @@ const BookList: React.FC<BookListProps> = ({ filteredBooks, handleViewDetails, r
               <Typography variant="body2" color="textSecondary">
                 Author: {bookData.author}
               </Typography>
-              <Box sx={{ display: 'flex', alignItems: 'center', marginTop: '10px' }}>
+              <Box
+                sx={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  marginTop: '10px',
+                }}
+              >
                 <Typography
                   variant="body2"
                   color="textSecondary"
@@ -194,7 +192,11 @@ const BookList: React.FC<BookListProps> = ({ filteredBooks, handleViewDetails, r
 
                   <Typography
                     variant="h6"
-                    sx={{ fontWeight: '600', textAlign: 'center', marginBottom: '8px' }}
+                    sx={{
+                      fontWeight: '600',
+                      textAlign: 'center',
+                      marginBottom: '8px',
+                    }}
                   >
                     {book.title}
                   </Typography>
@@ -217,7 +219,13 @@ const BookList: React.FC<BookListProps> = ({ filteredBooks, handleViewDetails, r
                     </Typography>
                   </Typography>
 
-                  <Box sx={{ display: 'flex', alignItems: 'center', marginTop: '8px' }}>
+                  <Box
+                    sx={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      marginTop: '8px',
+                    }}
+                  >
                     <Typography
                       variant="body2"
                       color="textSecondary"
@@ -285,7 +293,9 @@ const BookList: React.FC<BookListProps> = ({ filteredBooks, handleViewDetails, r
                       component="span"
                       sx={{ color: 'grey', pl: '5px' }}
                     >
-                       {new Date(book.createdAt ?? new Date()).toLocaleDateString()}
+                      {new Date(
+                        book.createdAt ?? new Date(),
+                      ).toLocaleDateString()}
                     </Typography>
                   </Typography>
 
@@ -304,8 +314,9 @@ const BookList: React.FC<BookListProps> = ({ filteredBooks, handleViewDetails, r
                       component="span"
                       sx={{ color: 'grey', pl: '5px' }}
                     >
-                     {new Date(book.updatedAt ?? new Date()).toLocaleDateString()}
-
+                      {new Date(
+                        book.updatedAt ?? new Date(),
+                      ).toLocaleDateString()}
                     </Typography>
                   </Typography>
 
@@ -322,7 +333,11 @@ const BookList: React.FC<BookListProps> = ({ filteredBooks, handleViewDetails, r
               </Grid>
             ))
           ) : (
-            <Typography variant="h6" color="textSecondary" sx={{ textAlign: 'center', width: '100%' }}>
+            <Typography
+              variant="h6"
+              color="textSecondary"
+              sx={{ textAlign: 'center', width: '100%' }}
+            >
               No books found.
             </Typography>
           )}

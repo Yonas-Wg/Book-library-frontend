@@ -3,6 +3,7 @@
 A personal book library application built using Next.js and React. This application helps users manage and track their personal book collection.
 
 ## Table of Contents
+
 - [Features](#features)
 - [Tech Stack](#tech-stack)
 - [Getting Started](#getting-started)
@@ -14,6 +15,7 @@ A personal book library application built using Next.js and React. This applicat
 ---
 
 ## Features
+
 - Manage a personal book library with ease.
 - User-friendly interface powered by Material-UI.
 - Form validation using Formik and Yup.
@@ -22,22 +24,28 @@ A personal book library application built using Next.js and React. This applicat
 ---
 
 ## Tech Stack
+
 ### Frontend
+
 - **Next.js**: React framework for server-rendered and static web applications.
 - **React**: Component-based library for building interactive UIs.
 
 ### UI & Styling
+
 - **Material-UI**: Modern React UI framework with pre-designed components.
 - **Tailwind CSS**: Utility-first CSS framework for styling.
 
 ### Validation & Forms
+
 - **Formik**: Form management library.
 - **Yup**: Schema-based validation.
 
 ### Notifications
+
 - **React-Toastify**: Notifications with toast messages.
 
 ### HTTP Client
+
 - **Axios**: Promise-based HTTP client for API requests.
 
 ---
@@ -72,22 +80,22 @@ Open your browser and visit http://localhost:3000.
 
 Scripts
 
-npm run dev     # Starts the development server.
-npm run build   # Builds the application for production.
-npm run start   # Starts the production server.
-npm run lint    # Runs lint checks on the codebase.
+npm run dev # Starts the development server.
+npm run build # Builds the application for production.
+npm run start # Starts the production server.
+npm run lint # Runs lint checks on the codebase.
 
 Folder Structure
 
 personal-book-library/
-├── public/           # Static assets
+├── public/ # Static assets
 ├── src/
-│   ├── components/   # Reusable UI components
-│   ├── pages/        # Next.js pages
-│   ├── styles/       # Global styles and Tailwind configurations
-│   ├── utils/        # Utility functions
-│   ├── hooks/        # Custom React hooks
-│   ├── services/     # API services (Axios)
-├── package.json      # Project metadata and dependencies
+│ ├── components/ # Reusable UI components
+│ ├── pages/ # Next.js pages
+│ ├── styles/ # Global styles and Tailwind configurations
+│ ├── utils/ # Utility functions
+│ ├── hooks/ # Custom React hooks
+│ ├── services/ # API services (Axios)
+├── package.json # Project metadata and dependencies
 ├── tailwind.config.js# Tailwind CSS configuration
-└── tsconfig.json     # TypeScript configuration
+└── tsconfig.json # TypeScript configuration

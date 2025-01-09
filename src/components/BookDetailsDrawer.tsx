@@ -1,4 +1,15 @@
-import { Drawer, Box, Typography, IconButton, Button, FormControlLabel, Checkbox, Select, MenuItem, TextField } from '@mui/material';
+import {
+  Drawer,
+  Box,
+  Typography,
+  IconButton,
+  Button,
+  FormControlLabel,
+  Checkbox,
+  Select,
+  MenuItem,
+  TextField,
+} from '@mui/material';
 import { Edit, Close, Delete } from '@mui/icons-material';
 import { Formik, Field, Form } from 'formik';
 import { Book } from '@/utils/types/types';
@@ -21,7 +32,6 @@ const BookDetailsDrawer = ({
   handleSubmit,
   handleDrawerClose,
   openDeleteDialog,
-  refetchBooks,
 }: {
   currentBook: Book | null;
   isEditMode: boolean;
@@ -29,7 +39,6 @@ const BookDetailsDrawer = ({
   handleSubmit: (values: any) => void;
   handleDrawerClose: () => void;
   openDeleteDialog: () => void;
-  refetchBooks: () => void;
 }) => (
   <Drawer
     anchor="right"
@@ -47,7 +56,13 @@ const BookDetailsDrawer = ({
   >
     {currentBook && (
       <>
-        <Box sx={{ display: 'flex', justifyContent: 'space-between', marginBottom: '20px' }}>
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            marginBottom: '20px',
+          }}
+        >
           <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
             {currentBook.title}
           </Typography>
@@ -58,10 +73,7 @@ const BookDetailsDrawer = ({
             <IconButton onClick={handleEditBook}>
               <Edit />
             </IconButton>
-            <IconButton
-              onClick={openDeleteDialog}
-              sx={{ color: 'error.main' }}
-            >
+            <IconButton onClick={openDeleteDialog} sx={{ color: 'error.main' }}>
               <Delete />
             </IconButton>
           </Box>
@@ -99,7 +111,9 @@ const BookDetailsDrawer = ({
                   fullWidth
                   sx={{ marginBottom: '15px' }}
                   error={touched.author && Boolean(errors.author)}
-                  helperText={touched.author && errors.author ? errors.author : ''}
+                  helperText={
+                    touched.author && errors.author ? errors.author : ''
+                  }
                 />
                 <Field
                   name="isbn"
@@ -154,7 +168,12 @@ const BookDetailsDrawer = ({
                   error={touched.notes && Boolean(errors.notes)}
                   helperText={touched.notes && errors.notes ? errors.notes : ''}
                 />
-                <Button type="submit" variant="contained" color="primary" fullWidth>
+                <Button
+                  type="submit"
+                  variant="contained"
+                  color="primary"
+                  fullWidth
+                >
                   Update Book
                 </Button>
               </Form>
@@ -169,20 +188,24 @@ const BookDetailsDrawer = ({
               <strong>ISBN:</strong> {currentBook.isbn}
             </Typography>
             <Typography variant="body1" sx={{ marginBottom: '10px' }}>
-              <strong>User Rating:</strong> <RatingStars rating={currentBook.userRating} />
+              <strong>User Rating:</strong>{' '}
+              <RatingStars rating={currentBook.userRating} />
             </Typography>
             <Typography variant="body1" sx={{ marginBottom: '10px' }}>
-              <strong>Read Status:</strong> {currentBook.readStatus ? 'Read' : 'Not Read'}
+              <strong>Read Status:</strong>{' '}
+              {currentBook.readStatus ? 'Read' : 'Not Read'}
             </Typography>
             <Typography variant="body1" sx={{ marginBottom: '10px' }}>
               <strong>Notes:</strong> {currentBook.notes}
             </Typography>
             <Typography variant="body1" sx={{ marginBottom: '10px' }}>
-            <strong>Created At:</strong> {new Date(currentBook.createdAt ?? '').toLocaleDateString()}
-          </Typography>
-          <Typography variant="body1" sx={{ marginBottom: '10px' }}>
-            <strong>Updated At:</strong> {new Date(currentBook.updatedAt ?? '').toLocaleDateString()}
-          </Typography>
+              <strong>Created At:</strong>{' '}
+              {new Date(currentBook.createdAt ?? '').toLocaleDateString()}
+            </Typography>
+            <Typography variant="body1" sx={{ marginBottom: '10px' }}>
+              <strong>Updated At:</strong>{' '}
+              {new Date(currentBook.updatedAt ?? '').toLocaleDateString()}
+            </Typography>
           </Box>
         )}
       </>

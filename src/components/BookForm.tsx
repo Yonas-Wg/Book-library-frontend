@@ -25,7 +25,7 @@ const BookForm: React.FC<Props> = ({ initialValues, onSubmit }) => {
         .required('ISBN is required')
         .matches(
           /^(97(8|9))?\d{9}(\d|X)$/,
-          'Please enter a valid ISBN (10 or 13 digits)'
+          'Please enter a valid ISBN (10 or 13 digits)',
         ),
     }),
     onSubmit,

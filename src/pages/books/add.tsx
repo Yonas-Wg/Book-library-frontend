@@ -1,5 +1,11 @@
 import { Formik, Form } from 'formik';
-import { TextField, Button, Checkbox, FormControlLabel, Box } from '@mui/material';
+import {
+  TextField,
+  Button,
+  Checkbox,
+  FormControlLabel,
+  Box,
+} from '@mui/material';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import * as Yup from 'yup';
@@ -11,7 +17,6 @@ interface AddBookFormProps {
   closeDialog: () => void;
   refetch: () => void;
 }
-
 
 // Yup validation schema
 const validationSchema = Yup.object({
@@ -31,10 +36,14 @@ const validationSchema = Yup.object({
   notes: Yup.string(),
 });
 
-const AddBookForm = ({ initialValues, closeDialog, refetch }: AddBookFormProps) => {
+const AddBookForm = ({
+  initialValues,
+  closeDialog,
+  refetch,
+}: AddBookFormProps) => {
   const onSubmit = async (book: Book) => {
     try {
-      const response = await axios.post('http://localhost:3000/books/manual', book);
+      await axios.post('http://localhost:3000/books/manual', book);
       toast.success('Book added successfully');
       closeDialog();
       refetch();
@@ -58,7 +67,7 @@ const AddBookForm = ({ initialValues, closeDialog, refetch }: AddBookFormProps) 
             variant="outlined"
             fullWidth
             margin="normal"
-            value={values.title}
+            value={values?.title}
             onChange={handleChange}
             error={touched.title && Boolean(errors.title)}
             helperText={touched.title && errors.title ? errors.title : ''}
@@ -69,7 +78,7 @@ const AddBookForm = ({ initialValues, closeDialog, refetch }: AddBookFormProps) 
             variant="outlined"
             fullWidth
             margin="normal"
-            value={values.author}
+            value={values?.author}
             onChange={handleChange}
             error={touched.author && Boolean(errors.author)}
             helperText={touched.author && errors.author ? errors.author : ''}
@@ -80,7 +89,7 @@ const AddBookForm = ({ initialValues, closeDialog, refetch }: AddBookFormProps) 
             variant="outlined"
             fullWidth
             margin="normal"
-            value={values.isbn}
+            value={values?.isbn}
             onChange={handleChange}
             error={touched.isbn && Boolean(errors.isbn)}
             helperText={touched.isbn && errors.isbn ? errors.isbn : ''}
@@ -92,16 +101,18 @@ const AddBookForm = ({ initialValues, closeDialog, refetch }: AddBookFormProps) 
             fullWidth
             margin="normal"
             type="number"
-            value={values.userRating}
+            value={values?.userRating}
             onChange={handleChange}
             error={touched.userRating && Boolean(errors.userRating)}
-            helperText={touched.userRating && errors.userRating ? errors.userRating : ''}
+            helperText={
+              touched.userRating && errors.userRating ? errors.userRating : ''
+            }
           />
           <FormControlLabel
             control={
               <Checkbox
                 name="readStatus"
-                checked={values.readStatus}
+                checked={values?.readStatus}
                 onChange={handleChange}
               />
             }
@@ -113,7 +124,7 @@ const AddBookForm = ({ initialValues, closeDialog, refetch }: AddBookFormProps) 
             variant="outlined"
             fullWidth
             margin="normal"
-            value={values.notes}
+            value={values?.notes}
             onChange={handleChange}
             multiline
             rows={4}

@@ -1,4 +1,4 @@
-const API_URL = 'http://localhost:3000/books'; 
+const API_URL = 'http://localhost:3000/books';
 
 // Helper function to make a fetch request
 const fetchAPI = async (url: string, options: RequestInit = {}) => {
@@ -20,9 +20,8 @@ export const getBooks = async () => {
 };
 
 export const getBookById = async (id: string) => {
-    return fetchAPI(`/api/books/${id}`);
-  };
-  
+  return fetchAPI(`/api/books/${id}`);
+};
 
 // Add a new book
 export const addBook = async (bookData: any) => {
