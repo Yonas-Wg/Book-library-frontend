@@ -1,36 +1,93 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Personal Book Library
 
-## Getting Started
+A personal book library application built using Next.js and React. This application helps users manage and track their personal book collection.
 
-First, run the development server:
+## Table of Contents
+- [Features](#features)
+- [Tech Stack](#tech-stack)
+- [Getting Started](#getting-started)
+- [Scripts](#scripts)
+- [Folder Structure](#folder-structure)
+- [Contributing](#contributing)
+- [License](#license)
 
-```bash
+---
+
+## Features
+- Manage a personal book library with ease.
+- User-friendly interface powered by Material-UI.
+- Form validation using Formik and Yup.
+- Toast notifications for a seamless user experience.
+
+---
+
+## Tech Stack
+### Frontend
+- **Next.js**: React framework for server-rendered and static web applications.
+- **React**: Component-based library for building interactive UIs.
+
+### UI & Styling
+- **Material-UI**: Modern React UI framework with pre-designed components.
+- **Tailwind CSS**: Utility-first CSS framework for styling.
+
+### Validation & Forms
+- **Formik**: Form management library.
+- **Yup**: Schema-based validation.
+
+### Notifications
+- **React-Toastify**: Notifications with toast messages.
+
+### HTTP Client
+- **Axios**: Promise-based HTTP client for API requests.
+
+---
+
+### Getting Started
+
+### Prerequisites
+
+Node.js (v18 or higher recommended)
+
+npm or yarn package manager
+
+### Installation
+
+Clone the repository:
+
+[git clone https://github.com/yourusername/personal-book-library.git](https://github.com/Yonas-Wg/Book-library-frontend.git)
+
+Navigate to the project directory:
+
+cd personal-book-library
+
+Install dependencies:
+
+npm install
+
+Run the development server:
+
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open your browser and visit http://localhost:3000.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Scripts
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+npm run dev     # Starts the development server.
+npm run build   # Builds the application for production.
+npm run start   # Starts the production server.
+npm run lint    # Runs lint checks on the codebase.
 
-## Learn More
+Folder Structure
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+personal-book-library/
+├── public/           # Static assets
+├── src/
+│   ├── components/   # Reusable UI components
+│   ├── pages/        # Next.js pages
+│   ├── styles/       # Global styles and Tailwind configurations
+│   ├── utils/        # Utility functions
+│   ├── hooks/        # Custom React hooks
+│   ├── services/     # API services (Axios)
+├── package.json      # Project metadata and dependencies
+├── tailwind.config.js# Tailwind CSS configuration
+└── tsconfig.json     # TypeScript configuration

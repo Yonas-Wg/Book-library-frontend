@@ -1,4 +1,4 @@
-const API_URL = 'http://localhost:3000/books'; // Relative API path
+const API_URL = 'http://localhost:3000/books'; 
 
 // Helper function to make a fetch request
 const fetchAPI = async (url: string, options: RequestInit = {}) => {

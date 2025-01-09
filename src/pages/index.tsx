@@ -171,15 +171,23 @@
             <Divider />
             <List>
               {/* Create Book ListItem */}
-              <ListItem button sx={{ fontWeight: 'bold', cursor: 'pointer' }} onClick={openDialog}>
+              <ListItem 
+                component="button" 
+                sx={{ fontWeight: 'bold', cursor: 'pointer' }} 
+                onClick={openDialog}
+              >
                 <ListItemIcon>
                   <LibraryAdd />
                 </ListItemIcon>
                 <ListItemText primary="Create Book" />
               </ListItem>
 
+
               {/* Books ListItem */}
-              <ListItem button sx={{ fontWeight: 'bold', cursor: 'pointer' }}>
+              <ListItem  
+               component="button"  
+               sx={{ fontWeight: 'bold',
+                cursor: 'pointer' }}>
                 <ListItemIcon>
                   <ViewList />
                 </ListItemIcon>

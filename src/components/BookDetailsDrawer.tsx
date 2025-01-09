@@ -178,11 +178,11 @@ const BookDetailsDrawer = ({
               <strong>Notes:</strong> {currentBook.notes}
             </Typography>
             <Typography variant="body1" sx={{ marginBottom: '10px' }}>
-              <strong>Created At:</strong> {new Date(currentBook.createdAt).toLocaleDateString()}
-            </Typography>
-            <Typography variant="body1" sx={{ marginBottom: '10px' }}>
-              <strong>Updated At:</strong> {new Date(currentBook.updatedAt).toLocaleDateString()}
-            </Typography>
+            <strong>Created At:</strong> {new Date(currentBook.createdAt ?? '').toLocaleDateString()}
+          </Typography>
+          <Typography variant="body1" sx={{ marginBottom: '10px' }}>
+            <strong>Updated At:</strong> {new Date(currentBook.updatedAt ?? '').toLocaleDateString()}
+          </Typography>
           </Box>
         )}
       </>

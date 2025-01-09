@@ -285,7 +285,7 @@ const BookList: React.FC<BookListProps> = ({ filteredBooks, handleViewDetails, r
                       component="span"
                       sx={{ color: 'grey', pl: '5px' }}
                     >
-                      {new Date(book.createdAt).toLocaleDateString()}
+                       {new Date(book.createdAt ?? new Date()).toLocaleDateString()}
                     </Typography>
                   </Typography>
 
@@ -304,7 +304,8 @@ const BookList: React.FC<BookListProps> = ({ filteredBooks, handleViewDetails, r
                       component="span"
                       sx={{ color: 'grey', pl: '5px' }}
                     >
-                      {new Date(book.updatedAt).toLocaleDateString()}
+                     {new Date(book.updatedAt ?? new Date()).toLocaleDateString()}
+
                     </Typography>
                   </Typography>
 

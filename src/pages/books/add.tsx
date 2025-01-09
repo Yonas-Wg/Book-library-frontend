@@ -7,9 +7,11 @@ import { Book } from '@/utils/types/types';
 
 interface AddBookFormProps {
   initialValues: Book;
+  onSubmit: (book: Book) => Promise<void>;
   closeDialog: () => void;
   refetch: () => void;
 }
+
 
 // Yup validation schema
 const validationSchema = Yup.object({
