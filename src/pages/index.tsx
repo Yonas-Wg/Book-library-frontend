@@ -175,52 +175,69 @@ const Home = () => {
 
       {/* Sidebar Drawer */}
       <Drawer
-        sx={{
-          width: 210,
-          flexShrink: 0,
-          bgcolor: 'background.paper',
-          '& .MuiDrawer-paper': {
-            width: 240,
-            boxSizing: 'border-box',
-            bgcolor: '#f4f6f9',
-          },
-        }}
-        variant={isSidebarOpen ? 'persistent' : 'temporary'}
-        anchor="left"
-        open={isSidebarOpen}
-      >
-        <Box sx={{ padding: 2 }}>
-          <Box sx={{ display: 'flex', alignItems: 'center' }}>
-            <LibraryBooks sx={{ marginRight: 2 }} />
-            <Typography variant="h6">PERSONAL BOOK LIBRARY</Typography>
-          </Box>
-          <Divider />
-          <List>
-            {/* Create Book ListItem */}
-            <ListItem
-              component="button"
-              sx={{ fontWeight: 'bold', cursor: 'pointer' }}
-              onClick={openDialog}
-            >
-              <ListItemIcon>
-                <LibraryAdd />
-              </ListItemIcon>
-              <ListItemText primary="Create Book" />
-            </ListItem>
-
-            {/* Books ListItem */}
-            <ListItem
-              component="button"
-              sx={{ fontWeight: 'bold', cursor: 'pointer' }}
-            >
-              <ListItemIcon>
-                <ViewList />
-              </ListItemIcon>
-              <ListItemText primary="Books List" />
-            </ListItem>
-          </List>
+      sx={{
+        width: 240,
+        flexShrink: 0,
+        '& .MuiDrawer-paper': {
+          width: 240,
+          boxSizing: 'border-box',
+          bgcolor: '#f4f6f9',
+          boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)',
+          borderRight: '1px solid #ddd',
+        },
+      }}
+      variant={isSidebarOpen ? 'persistent' : 'temporary'}
+      anchor="left"
+      open={isSidebarOpen}
+    >
+      <Box sx={{ padding: 2 }}>
+        {/* Header Section */}
+        <Box sx={{ display: 'flex', alignItems: 'center', marginBottom: 2 }}>
+          <LibraryBooks sx={{ marginRight: 1, color: '#3f51b5' }} />
+          <Typography
+            variant="h6"
+            sx={{ fontWeight: 'bold', color: '#3f51b5', textTransform: 'uppercase' }}
+          >
+            Personal Book Library
+          </Typography>
         </Box>
-      </Drawer>
+        <Divider />
+
+        {/* Menu Items */}
+        <List>
+          <ListItem
+              component="button"
+            onClick={openDialog}
+            sx={{
+              '&:hover': {
+                backgroundColor: '#e3f2fd',
+                cursor: 'pointer',
+              },
+            }}
+          >
+            <ListItemIcon sx={{ color: '#3f51b5' }}>
+              <LibraryAdd />
+            </ListItemIcon>
+            <ListItemText primary="Create Book" />
+          </ListItem>
+
+          <ListItem
+             component="button"
+            sx={{
+              '&:hover': {
+                backgroundColor: '#e3f2fd',
+                cursor: 'pointer',
+              },
+            }}
+          >
+            <ListItemIcon sx={{ color: '#3f51b5' }}>
+              <ViewList />
+            </ListItemIcon>
+            <ListItemText primary="Books List" />
+          </ListItem>
+        </List>
+      </Box>
+    </Drawer>
 
       {/* Main content */}
       <Box
@@ -236,16 +253,23 @@ const Home = () => {
           <MenuIcon />
         </IconButton>
 
+    <div style={{ display: 'flex', flexDirection: 'column' , marginLeft: '20px', marginRight: '20px' }}>
         <Typography variant="h4">Books Library</Typography>
         <Box sx={{ display: 'flex', gap: '10px', marginBottom: '20px' }}>
           <TextField
             label="Search by title, author, or ISBN"
             variant="outlined"
-            fullWidth
+            sx={{
+              Width: '800px',
+              '& .MuiOutlinedInput-root': {
+              },
+            }}
             value={search}
             onChange={handleSearchChange}
           />
         </Box>
+
+        </div>
 
         {filteredBooks.length === 0 ? (
           <Typography>No books available</Typography>

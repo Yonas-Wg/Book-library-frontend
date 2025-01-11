@@ -39,17 +39,23 @@ const BookList: React.FC<BookListProps> = ({
 
   const fetchBookByISBN = async (isbn: string) => {
     setLoading(true);
+    setBookData(null); 
     try {
       const response = await axios.get(
         `https://openlibrary.org/api/books?bibkeys=ISBN:${isbn}&format=json&jscmd=data`,
       );
+  
       if (!response.data || !response.data[`ISBN:${isbn}`]) {
-        throw new Error('No book data found for the provided ISBN');
+        toast.error('No book data found for the provided ISBN');
+        return; 
       }
-      const book = mapToBook(response.data[`ISBN:${isbn}`]);
-      setBookData(book);
-    } catch (error) {
-      console.error('Error fetching book data from Open Library API:', error);
+  
+      const rawBookData = response.data[`ISBN:${isbn}`];
+    const book = mapToBook(rawBookData || {});
+    setBookData(book);
+  } catch (error: any) {
+    console.error('Error fetching book data:', error);
+    toast.error('An error occurred while fetching book data.');
     } finally {
       setLoading(false);
     }
@@ -100,54 +106,55 @@ const BookList: React.FC<BookListProps> = ({
           </Box>
         </Box>
 
-        {bookData && !bookAdded && (
-          <Box sx={{ marginBottom: '20px' }}>
-            <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
-              Book Found by ISBN:
-            </Typography>
-            <Box
-              sx={{
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                padding: 5,
-                backgroundColor: '#f9f9f9',
-                borderRadius: 2,
-                boxShadow: 1,
-              }}
-            >
-              <Typography variant="body1">{bookData.title}</Typography>
-              <Typography variant="body2" color="textSecondary">
-                Author: {bookData.author}
-              </Typography>
-              <Box
-                sx={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  marginTop: '10px',
-                }}
-              >
-                <Typography
-                  variant="body2"
-                  color="textSecondary"
-                  sx={{ marginRight: '5px' }}
-                >
-                  User Rating:
+        {loading && <Typography>Loading...</Typography>}
+            {bookData && !bookAdded && (
+              <Box sx={{ marginBottom: '20px' }}>
+                <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
+                  Book Found by ISBN:
                 </Typography>
-                <RatingStars rating={bookData.userRating} />
+                <Box
+                  sx={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    padding: 5,
+                    backgroundColor: '#f9f9f9',
+                    borderRadius: 2,
+                    boxShadow: 1,
+                  }}
+                >
+                  <Typography variant="body1">{bookData.title}</Typography>
+                  <Typography variant="body2" color="textSecondary">
+                    Author: {bookData.author}
+                  </Typography>
+                  <Box
+                    sx={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      marginTop: '10px',
+                    }}
+                  >
+                    <Typography
+                      variant="body2"
+                      color="textSecondary"
+                      sx={{ marginRight: '5px' }}
+                    >
+                      User Rating:
+                    </Typography>
+                    <RatingStars rating={bookData.userRating} />
+                  </Box>
+                  <Button
+                    variant="contained"
+                    color="secondary"
+                    onClick={() => saveBookToDatabase(bookData)}
+                    sx={{ marginTop: '20px' }}
+                    disabled={saveLoading}
+                  >
+                    {saveLoading ? 'Saving...' : 'Add to List'}
+                  </Button>
+                </Box>
               </Box>
-              <Button
-                variant="contained"
-                color="secondary"
-                onClick={() => saveBookToDatabase(bookData)}
-                sx={{ marginTop: '20px' }}
-                disabled={saveLoading}
-              >
-                {saveLoading ? 'Saving...' : 'Add to List'}
-              </Button>
-            </Box>
-          </Box>
-        )}
+            )}
 
         <Grid container spacing={3}>
           {filteredBooks && filteredBooks.length > 0 ? (

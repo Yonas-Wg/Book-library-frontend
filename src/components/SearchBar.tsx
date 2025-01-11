@@ -8,12 +8,13 @@ interface Props {
 
 const SearchBar: React.FC<Props> = ({ searchQuery, onSearchChange }) => {
   return (
+
     <Box
       sx={{
         display: 'flex',
         justifyContent: 'center',
         marginBottom: '20px',
-        padding: { xs: 2, md: 4 },
+        padding: { xs: 2, md: 10 },
       }}
     >
       <TextField
@@ -23,9 +24,9 @@ const SearchBar: React.FC<Props> = ({ searchQuery, onSearchChange }) => {
         onChange={onSearchChange}
         fullWidth
         sx={{
-          maxWidth: '400px',
+          maxWidth: '100px',
           '& .MuiOutlinedInput-root': {
-            paddingRight: '8px',
+            padding: '8px',
           },
         }}
       />
