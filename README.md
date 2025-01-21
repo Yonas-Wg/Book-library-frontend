@@ -62,7 +62,7 @@ npm or yarn package manager
 
 Clone the repository:
 
-[git clone https://github.com/yourusername/personal-book-library.git](https://github.com/Yonas-Wg/Book-library-frontend.git)
+[git clone https://github.com/Yonas-Wg/Book-library-frontend.git]
 
 Navigate to the project directory:
 
